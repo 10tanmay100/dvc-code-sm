@@ -1,0 +1,59 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python data_ingestion.py
+    deps:
+    - path: data
+      hash: md5
+      md5: 7bf7e9dfe00967eb4b875145a3b3508e.dir
+      size: 11328
+      nfiles: 1
+    - path: data_ingestion.py
+      hash: md5
+      md5: 7c45d7dd58675867039a1abca2fda47c
+      size: 1025
+    params:
+      params.yaml:
+        data_ingestion.test_size: 0.3
+    outs:
+    - path: splitted_data
+      hash: md5
+      md5: 8aa3892fcede94b1b7a37cdf501d0b4f.dir
+      size: 11971
+      nfiles: 4
+  model_building:
+    cmd: python model_trainer.py
+    deps:
+    - path: model_trainer.py
+      hash: md5
+      md5: 90369fa8e7053c3ae2e55e3eeee46629
+      size: 825
+    - path: splitted_data
+      hash: md5
+      md5: 8aa3892fcede94b1b7a37cdf501d0b4f.dir
+      size: 11971
+      nfiles: 4
+    params:
+      params.yaml:
+        model_trainer.n_neighbors: 6
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: d2f3e45dd8e2ae9e24b577e94a04ec90
+      size: 51030
+  model_evaluation:
+    cmd: python eval.py
+    deps:
+    - path: eval.py
+      hash: md5
+      md5: baa5788bfa07bb9a42bd32524481e05e
+      size: 1439
+    - path: models/model.pkl
+      hash: md5
+      md5: d2f3e45dd8e2ae9e24b577e94a04ec90
+      size: 51030
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 2d925cdc2b2646a745b8057d48ef6d95
+      size: 122

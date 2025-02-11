@@ -1,0 +1,37 @@
+stages:
+  data_ingestion:
+    cmd: python data_ingestion.py
+    deps:
+    - data_ingestion.py
+    - data
+    params:
+    - data_ingestion.test_size
+    outs:
+    - splitted_data
+
+  model_building:
+    cmd: python model_trainer.py
+    deps:
+    - splitted_data
+    - model_trainer.py
+    params:
+    - model_trainer.n_neighbors
+    outs:
+    - models/model.pkl
+
+  model_evaluation:
+    cmd: python eval.py
+    deps:
+    - models/model.pkl
+    - eval.py
+    metrics:
+    - metrics.json
+artifacts:
+  model:
+    path: models/model.pkl
+    type: model
+metrics:
+- dvclive/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step
