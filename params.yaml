@@ -1,16 +1,6 @@
-# params.yaml
 data_ingestion:
-  test_size: 0.30
+  test_size_param: 0.2
+  random_state_param: 42
 
-model_trainer:
-  n_neighbors: 6
-
-
-
-
-
-
-
-
-
-
+model_training:
+  n_neighbors_param: 6

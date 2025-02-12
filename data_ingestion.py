@@ -16,8 +16,9 @@ def load_dataset(data_path):
     return X,y
 
 def split_dataset(X,y):
-    test_size_param=load_params("params.yaml")["data_ingestion"]["test_size"]
-    Xtrain, Xtest,Ytrain,Ytest = train_test_split(X,y, test_size=test_size_param, random_state=42)
+    test_size_param=load_params("params.yaml")["data_ingestion"]["test_size_param"]
+    random_state_param=load_params("params.yaml")["data_ingestion"]["random_state_param"]
+    Xtrain, Xtest,Ytrain,Ytest = train_test_split(X,y, test_size=test_size_param, random_state=random_state_param)
     os.makedirs("splitted_data",exist_ok=True)
     Xtrain.to_csv("splitted_data/xtrain.csv",index=False), Xtest.to_csv("splitted_data/xtest.csv",index=False),Ytrain.to_csv("splitted_data/ytrain.csv",index=False),Ytest.to_csv("splitted_data/ytest.csv",index=False)
 

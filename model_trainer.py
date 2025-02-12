@@ -2,17 +2,13 @@ from sklearn.neighbors import KNeighborsClassifier
 import joblib
 import pandas as pd
 from utils import load_params
-from dvclive import Live
 
 def train_model(X,y,model_save_path="models/model.pkl"):
-    n_neighbors=load_params("params.yaml")["model_trainer"]["n_neighbors"]
-    # with Live() as live:
-    #     live.log_param("epochs", n_neighbors)
-
-    knn_classifier = KNeighborsClassifier(n_neighbors = n_neighbors)
+    n_neighbors_param=load_params("params.yaml")["model_training"]["n_neighbors_param"]
+    knn_classifier = KNeighborsClassifier(n_neighbors = n_neighbors_param)
     knn_classifier.fit(X,y)
     joblib.dump(knn_classifier, model_save_path)
-        # live.log_artifact(model_save_path, type="model")
+    
     return True
 
 if __name__ == "__main__":
