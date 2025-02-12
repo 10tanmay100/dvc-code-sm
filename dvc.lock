@@ -5,7 +5,7 @@ stages:
     deps:
     - path: data
       hash: md5
-      md5: 01d304b21554a05a6623569b69329b9a.dir
+      md5: 5e620ab7dab07d0f0dc67749ccd9fd5d.dir
       size: 11328
       nfiles: 1
     - path: data_ingestion.py
@@ -15,7 +15,7 @@ stages:
     outs:
     - path: splitted_data
       hash: md5
-      md5: 120d45c2853254234704e3d6cb953bb9.dir
+      md5: 367665a81cc5bd485996fe2d78a91b71.dir
       size: 11971
       nfiles: 4
   model_building:
@@ -27,13 +27,13 @@ stages:
       size: 685
     - path: splitted_data
       hash: md5
-      md5: 120d45c2853254234704e3d6cb953bb9.dir
+      md5: 367665a81cc5bd485996fe2d78a91b71.dir
       size: 11971
       nfiles: 4
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 728c672530ebce31aba26a76733e77b1
+      md5: 24b0566b862b6e7843d3b65e4ca729e1
       size: 59670
   model_evaluation:
     cmd: python eval.py
@@ -44,7 +44,7 @@ stages:
       size: 1031
     - path: models/model.pkl
       hash: md5
-      md5: 728c672530ebce31aba26a76733e77b1
+      md5: 24b0566b862b6e7843d3b65e4ca729e1
       size: 59670
     outs:
     - path: metrics.json
